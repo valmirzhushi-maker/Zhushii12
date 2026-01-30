@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zhushi Construction - Ndërtojmë Shtëpinë Tuaj</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<style>
+/* RESET & FONT */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, sans-serif; scroll-behavior:smooth;}
+body { background:#ffffff; color:#111827; line-height:1.6; }
+
+/* HEADER + NAV */
+header, nav { background:#111827; border-bottom:4px solid #10B981; display:flex; align-items:center; justify-content:space-between; padding:10px 20px; position:sticky; top:0; z-index:100; }
+nav ul { list-style:none; display:flex; gap:15px; }
+nav ul li a { color:#e5e7eb; text-decoration:none; font-weight:600; }
+nav ul li a:hover { color:#10B981; }
+
+/* LOGO */
+.logo-text { font-size:1.8rem; font-weight:700; display:flex; align-items:center; gap:5px; text-decoration:none; }
+.logo-zhushi { color:#fff; }
+.logo-construction { color:#10B981; }
+.logo-text:hover .logo-construction { color:#34D399; transform:translateY(-3px); transition:0.3s; }
+
+/* HERO */
+.hero {
+    height:600px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; color:#fff;
+    background: linear-gradient(rgba(17,24,39,0.8), rgba(17,24,39,0.8)),
+                url("https://pixabay.com/photos/construction-building-work-site-2765140/") center/cover no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+.hero h1 { font-size:3rem; letter-spacing:2px; opacity:0; transform:translateX(50px); animation:slideInRight 1s forwards; animation-delay:0.5s; }
+.hero p { margin:15px 0; opacity:0; transform:translateY(20px); animation:fadeInUp 1s forwards; animation-delay:0.8s; }
+.hero .btn {
+    background:#10B981; color:#111827; border-radius:30px; padding:12px 25px; font-weight:600; text-decoration:none;
+    transition:all 0.3s ease; opacity:0; transform:translateY(20px); animation:fadeInUp 1s forwards; animation-delay:1.1s;
+    animation-name:fadeInUp,pulse; animation-duration:1s, 2s; animation-iteration-count:1, infinite;
+}
+.hero .btn:hover { background:#059669; transform:scale(1.1); }
+
+/* SECTIONS */
+section { padding:60px 20px; }
+section h2 { font-size:2.2rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; }
+
+/* CARDS */
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+.card { background:#fff; border-left:5px solid #10B981; box-shadow:0 10px 25px rgba(0,0,0,0.08); border-radius:8px; overflow:hidden; padding:15px; opacity:0; transform:translateY(20px); transition:all 0.3s ease; }
+.card img { width:100%; border-radius:8px; margin-bottom:10px; }
+.card:hover { transform:scale(1.05); box-shadow:0 20px 35px rgba(0,0,0,0.2); }
+
+/* ADVANTAGES */
+.advantages { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.adv-card { background:#fff; text-align:center; padding:20px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1); transition:all 0.3s ease; }
+.adv-card:hover { transform:translateY(-5px); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+.adv-card i { font-size:2.5rem; color:#10B981; margin-bottom:10px; }
+
+/* TESTIMONIALS */
+.testimonials { position:relative; max-width:800px; margin:auto; overflow:hidden; }
+.testimonial { display:none; text-align:center; padding:20px; }
+.testimonial.active { display:block; }
+.testimonial p { font-style:italic; margin-bottom:10px; }
+.testimonial h4 { color:#10B981; }
+
+/* CONTACT */
+.contact form { display:flex; flex-direction:column; gap:15px; max-width:500px; margin:auto; }
+.contact input, .contact textarea { border:2px solid #e5e7eb; padding:10px; border-radius:8px; width:100%; }
+.contact input:focus, .contact textarea:focus { outline:none; border-color:#10B981; }
+.contact button { background:#10B981; color:#111827; padding:12px 20px; border:none; border-radius:30px; font-weight:600; cursor:pointer; transition:0.3s; }
+.contact button:hover { background:#059669; }
+
+/* FOOTER */
+footer { background:#111827; color:#e5e7eb; text-align:center; padding:20px; border-top:4px solid #10B981; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+@keyframes slideInRight { to { opacity:1; transform:translateX(0); } }
+@keyframes pulse { 0% { transform:scale(1); } 50% { transform:scale(1.05); } 100% { transform:scale(1); } }
+
+/* FLOATING BUTTONS */
+.floating-btn { position:fixed; right:20px; width:55px; height:55px; border-radius:50%; color:#fff; font-size:26px; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 10px 20px rgba(0,0,0,0.3); z-index:999; transition: transform 0.3s ease; }
+.whatsapp-btn { bottom:90px; background:#25D366; }
+.call-btn1 { bottom:20px; background:#10B981; }
+.call-btn2 { bottom:150px; background:#059669; }
+.instagram-btn { bottom:220px; background:#C13584; }
+.facebook-btn { bottom:290px; background:#1877F2; }
+.floating-btn:hover { transform: scale(1.2) rotate(-5deg); }
+
+/* BACK TO TOP BUTTON */
+#topBtn { position: fixed; bottom:360px; right:20px; display:none; width:50px; height:50px; background:#10B981; color:#fff; border:none; border-radius:50%; font-size:22px; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.3); z-index:999; transition:all 0.3s ease;}
+#topBtn:hover { transform:scale(1.2); }
+
+/* RESPONSIVE */
+@media(max-width:768px){ nav ul { flex-direction:column; background:#111827; position:absolute; top:60px; right:0; width:200px; display:none; } nav ul.show { display:flex; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <a href="#home" class="logo-text">
+        <span class="logo-zhushi">Zhushi</span>
+        <span class="logo-construction">Construction</span>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="#home">Kryefaqja</a></li>
+            <li><a href="#about">Rreth Nesh</a></li>
+            <li><a href="#services">Shërbimet</a></li>
+            <li><a href="#projects">Projektet</a></li>
+            <li><a href="#contact">Kontakti</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <h1 id="heroText"></h1>
+    <p>Zhushi Construction – Eksperiencë dhe profesionalizëm në çdo projekt.</p>
+    <a href="#contact" class="btn">Kontakto Tani</a>
+</section>
+
+<!-- Rreth Nesh -->
+<section id="about">
+    <h2>Rreth Nesh</h2>
+    <p>Zhushi Construction është një kompani ndërtimi në Kosovë, e specializuar në ndërtimin e shtëpive dhe projekteve rezidenciale. Ne ofrojmë cilësi, besueshmëri dhe profesionalizëm në çdo hap.</p>
+</section>
+
+<!-- ADVANTAZHET -->
+<section id="advantages">
+    <h2>Pse të Zgjidhni Ne</h2>
+    <div class="advantages">
+        <div class="adv-card"><i>💪</i><h3>Profesionalizëm</h3><p>Ekip me eksperiencë të gjatë dhe profesionalizëm.</p></div>
+        <div class="adv-card"><i>⏱</i><h3>Koha e Saktë</h3><p>Përfundim i projekteve brenda afateve të dakorduara.</p></div>
+        <div class="adv-card"><i>🏆</i><h3>Cilësi dhe Garanci</h3><p>Punime cilësore me materialet më të mira.</p></div>
+        <div class="adv-card"><i>🤝</i><h3>Besueshmëri</h3><p>Marrëdhënie të besueshme me klientët tanë.</p></div>
+    </div>
+</section>
+
+<!-- Shërbimet -->
+<section id="services">
+    <h2>Shërbimet</h2>
+    <div class="cards">
+        <div class="card">
+            <img src="https://pixabay.com/photos/construction-construction-site-5239229/" alt="Shërbimi i Ndërtimit">
+            <h3>Ndërtim Shtëpish</h3>
+            <p>Ofrojmë ndërtim cilësor të shtëpive me përkujdesje në çdo detaj.</p>
+        </div>
+        <div class="card">
+            <img src="https://pixabay.com/photos/excavator-construction-work-site-2142250/" alt="Punime Terreni">
+            <h3>Punime Terreni</h3>
+            <p>Shërbime të plota për terrenin dhe përgatitjen e projektit tuaj.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Projektet -->
+<section id="projects">
+    <h2>Projektet</h2>
+    <div class="cards">
+        <div class="card">
+            <img src="https://pixabay.com/photos/construction-site-building-wall-2765119/" alt="Projekt Ndërtimi">
+            <h3>Projekt i Realizuar</h3>
+            <p>Pamje reale e kantierit të punuar nga ekipi ynë profesional.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+    <h2>Çfarë thonë klientët</h2>
+    <div class="testimonials">
+        <div class="testimonial active">
+            <p>"Shërbim profesional dhe i shpejtë. E rekomandoj pa dyshim!"</p>
+            <h4>- Arber K.</h4>
+        </div>
+        <div class="testimonial">
+            <p>"Ekip i përkushtuar dhe projektet përfunduan brenda afatit."</p>
+            <h4>- Liridona H.</h4>
+        </div>
+        <div class="testimonial">
+            <p>"Cilësi e lartë dhe komunikim i shkëlqyer me klientët."</p>
+            <h4>- Besart M.</h4>
+        </div>
+    </div>
+</section>
+
+<!-- Kontakt -->
+<section id="contact" class="contact">
+    <h2>Kontakti</h2>
+    <form action="https://formsubmit.co/valmirzhushi@outlook.com" method="POST">
+        <input type="hidden" name="_subject" value="Mesazh nga Zhushi Construction Website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Emri juaj" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" rows="5" placeholder="Mesazhi juaj" required></textarea>
+        <button type="submit">Dërgo Mesazhin</button>
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    &copy; 2026 Zhushi Construction. Të gjitha të drejtat e rezervuara.
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/38349880866" class="floating-btn whatsapp-btn" target="_blank">💬</a>
+<a href="tel:+38349880866" class="floating-btn call-btn1">📞</a>
+<a href="tel:+383491966565" class="floating-btn call-btn2">📞</a>
+<a href="https://instagram.com/zhushi_construction" class="floating-btn instagram-btn" target="_blank">📸</a>
+<a href="https://facebook.com/zhushi.construction" class="floating-btn facebook-btn" target="_blank">👍</a>
+
+<!-- BACK TO TOP -->
+<button id="topBtn" title="Kthehu lart">⬆️</button>
+
+<script>
+// TYPEWRITER HERO
+const heroText = "Ndërtojmë shtëpinë tuaj me cilësi dhe besim";
+let i=0;
+const el = document.getElementById("heroText");
+function typeWriter(){ 
+    if(i<heroText.length){
+        el.innerHTML += heroText.charAt(i);
+        i++;
+        setTimeout(typeWriter,50);
+    }
+}
+typeWriter();
+
+// TESTIMONIALS SLIDER
+let tIndex=0;
+const testimonials=document.querySelectorAll(".testimonial");
+function showTestimonials(){
+    testimonials.forEach(t=>t.classList.remove("active"));
+    tIndex = (tIndex+1) % testimonials.length;
+    testimonials[tIndex].classList.add("active");
+}
+setInterval(showTestimonials,4000);
+
+// BACK TO TOP & SCROLL ANIMATIONS
+const topBtn = document.getElementById("topBtn");
+window.onscroll = function() {
+    if(document.body.scrollTop > 300 || document.documentElement.scrollTop > 300){
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+
+    // Scroll animation for cards
+    document.querySelectorAll('.card').forEach((card,index)=>{
+        const rect = card.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+            card.style.opacity=1;
+            card.style.transform='translateY(0)';
+            card.style.transition = `all 0.3s ease ${index * 0.2}s`;
+        }
+    });
+
+    // Scroll animation for advantages
+    document.querySelectorAll('.adv-card').forEach((card,index)=>{
+        const rect = card.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+            card.style.opacity=1;
+            card.style.transform='translateY(0)';
+            card.style.transition = `all 0.3s ease ${index * 0.2}s`;
+        }
+    });
+};
+
+topBtn.onclick = function() { window.scrollTo({top:0, behavior:'smooth'}); };
+</script>
+
+</body>
+</html>
